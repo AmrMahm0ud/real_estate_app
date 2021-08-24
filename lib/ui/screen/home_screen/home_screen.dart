@@ -10,12 +10,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      //Color(0xffF9F9F9),
+      backgroundColor: Color(0xffF9F9F9),
       appBar: appBarWidget(),
       body: Stack(
         children: [
-          Container(height: 150, child: SliderImagesWidget()),
+          homeWidget(),
           sortButtonWidget(),
         ],
       ),
@@ -27,6 +26,18 @@ class _HomeScreenState extends State<HomeScreen> {
   ///////////////////////////////////////
   ////////////// Helper Widgets//////////
   ///////////////////////////////////////
+
+  Widget homeWidget() {
+    return ListView(
+      children: [
+        SliderImagesWidget(),
+        Text("test"),
+        Text("test"),
+        Text("test"),
+        Text("test"),
+      ],
+    );
+  }
 
   Widget sortButtonWidget() {
     return Positioned(
@@ -94,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         currentIndex: 0,
         unselectedItemColor: Colors.grey,
-        fixedColor: Colors.black,
+        fixedColor: Color(0xff026A83),
       ),
     );
   }
@@ -129,7 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.grey,
             fontWeight: FontWeight.bold,
           ),
-          prefixIcon: const Icon(Icons.search),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Color(0xff026A83),
+          ),
           suffixIcon: filterWidget(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
@@ -149,8 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text("Filter"),
-              Icon(Icons.filter_list_outlined),
+              Text(
+                "Filter",
+                style: TextStyle(color: Color(0xff026A83)),
+              ),
+              Icon(
+                Icons.filter_list_outlined,
+                color: Color(0xff026A83),
+              ),
             ],
           ),
         ),
@@ -164,8 +184,14 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Rent"),
-          Icon(Icons.arrow_drop_down_sharp),
+          Text(
+            "Rent",
+            style: TextStyle(color: Color(0xff026A83)),
+          ),
+          Icon(
+            Icons.arrow_drop_down_sharp,
+            color: Color(0xff026A83),
+          ),
         ],
       ),
     );
