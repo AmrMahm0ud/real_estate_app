@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:real_estate_app/bloc/home_bloc/home_bloc.dart';
+import 'package:real_estate_app/bloc/home_bloc/home_event.dart';
+import 'package:real_estate_app/ui/widget/item_card_widget.dart';
 import 'package:real_estate_app/ui/widget/silder_images.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -7,6 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getHomeData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       children: [
         SliderImagesWidget(),
-        Text("test"),
-        Text("test"),
-        Text("test"),
-        Text("test"),
+        ItemCardWidget(),
       ],
     );
   }
@@ -196,8 +203,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 /////////////////////////////////////////
 ////////////helper function///////////////
 /////////////////////////////////////////
-
+  void getHomeData() {
+    BlocProvider.of<HomeBloc>(context).add(GetHomeDataEvent());
+  }
 }
