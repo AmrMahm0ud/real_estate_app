@@ -17,8 +17,12 @@ class HomeRepository extends BaseHomeRepository {
     HomeState homeState;
     List<PropertyListModel> propertyList = [];
     try {
-      propertyList = await PropertyApi.getPropertyListApi();
-      print(propertyList.length);
+      propertyList = await PropertyApi().getPropertyListApi();
+      if (propertyList.length != 0) {
+        homeState = ReceivedHomeDataState(propertyList);
+      } else {
+        homeState = ErrorHomeState();
+      }
     } on SocketException {
       homeState = NetworkErrorHomeState();
     } catch (error) {
