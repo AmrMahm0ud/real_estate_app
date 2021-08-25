@@ -1,11 +1,8 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:real_estate_app/api_manager/property_api.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
 import 'package:real_estate_app/model/property_model.dart';
-import 'package:real_estate_app/network/remote/end_pionts.dart';
-import 'package:real_estate_app/network/remote/home_api.dart';
 
 abstract class BaseHomeRepository {
   Future<HomeState> getHomeData();

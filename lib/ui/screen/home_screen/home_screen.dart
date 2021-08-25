@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_bloc.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_event.dart';
+import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
+import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/ui/widget/item_card_widget.dart';
 import 'package:real_estate_app/ui/widget/silder_images.dart';
 
@@ -20,15 +22,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-
-      // Color(0xffF9F9F9),
+      backgroundColor: Color(0xffF9F9F9),
       appBar: appBarWidget(),
-      body: Stack(
-        children: [
-          homeWidget(),
-          sortButtonWidget(),
-        ],
+      body: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is ReceivedHomeDataState) {
+            return buildBodyWidget(state.propertyListModel);
+          } else {
+            return Text("Falied");
+          }
+        },
       ),
       bottomNavigationBar: bottomNavigationBar(),
       floatingActionButton: floatingActionButtonWidget(),
@@ -38,6 +42,34 @@ class _HomeScreenState extends State<HomeScreen> {
   ///////////////////////////////////////
   ////////////// Helper Widgets//////////
   ///////////////////////////////////////
+
+  // Stack(
+  // children: [
+  // homeWidget(),
+  // sortButtonWidget(),
+  // ],
+  // ),
+
+  Widget buildBodyWidget(List<PropertyListModel> propertyListModel) {
+    return Stack(
+      children: [
+        ListView.builder(
+            itemCount: propertyListModel.length,
+            itemBuilder: (context, index) {
+              return ItemCardWidget(
+                price: propertyListModel[index].price,
+                address: propertyListModel[index].address,
+                bathRooms: propertyListModel[index].bathRooms,
+                areaSpace: propertyListModel[index].areaSpace,
+                bedRooms: propertyListModel[index].bedRooms,
+                category: propertyListModel[index].category,
+                sliderCardImages: propertyListModel[index].propertyImages,
+              );
+            }),
+        sortButtonWidget(),
+      ],
+    );
+  }
 
   Widget homeWidget() {
     return ListView(

@@ -1,11 +1,32 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemCardWidget extends StatelessWidget {
+  final String price, address, category;
+
+  final double bedRooms, bathRooms, areaSpace;
+
+  final List<String> sliderCardImages;
+
+  const ItemCardWidget(
+      {Key key,
+      this.price,
+      this.address,
+      this.category,
+      this.bedRooms,
+      this.bathRooms,
+      this.areaSpace,
+      this.sliderCardImages})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(
+        left: 1.0,
+        right: 1.0,
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -20,11 +41,12 @@ class ItemCardWidget extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomLeft: Radius.circular(12)),
-                    color: Colors.red),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      bottomLeft: Radius.circular(12)),
+                ),
                 width: 140,
+                child: sliderImageCardWidget(sliderCardImages),
               ),
               Expanded(
                 child: Container(
@@ -40,7 +62,7 @@ class ItemCardWidget extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "ahmed".toUpperCase(),
+                                category.toUpperCase(),
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
@@ -54,7 +76,7 @@ class ItemCardWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: Text(
-                          "165000" + " AED",
+                          price + " AED",
                           style: TextStyle(fontSize: 13.0),
                         ),
                       ),
@@ -66,7 +88,7 @@ class ItemCardWidget extends StatelessWidget {
                           ),
                           width: 100,
                           child: Text(
-                            "al raha beach-Al Muneera-AI",
+                            address,
                             maxLines: 2,
                             style: TextStyle(fontSize: 13.0),
                           ),
@@ -79,7 +101,7 @@ class ItemCardWidget extends StatelessWidget {
                             child: Icon(Icons.king_bed_outlined),
                           ),
                           Text(
-                            "1",
+                            "${removeDecimalZeroFormat(bedRooms)}",
                             style: TextStyle(fontSize: 11.0),
                           ),
                           Padding(
@@ -87,7 +109,7 @@ class ItemCardWidget extends StatelessWidget {
                             child: Icon(Icons.bathtub_outlined),
                           ),
                           Text(
-                            "2",
+                            "${removeDecimalZeroFormat(bathRooms)}",
                             style: TextStyle(fontSize: 11.0),
                           ),
                           Padding(
@@ -95,7 +117,7 @@ class ItemCardWidget extends StatelessWidget {
                             child: Icon(Icons.apartment),
                           ),
                           Text(
-                            "2340.0" + "sqft",
+                            "$areaSpace" + "sqft",
                             style: TextStyle(fontSize: 11.0),
                           )
                         ],
@@ -109,5 +131,42 @@ class ItemCardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+///////////////////////////////
+////////////Helper Widget ///////
+/////////////////////////////////
+
+  Widget sliderImageCardWidget(List<String> imagesUrl) {
+    return CarouselSlider(
+      items: imagesUrl
+          .map((image) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12.0),
+                    topLeft: Radius.circular(12.0),
+                  ),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(
+                      image,
+                    ),
+                  ),
+                ),
+              ))
+          .toList(),
+      options: CarouselOptions(
+        viewportFraction: 1.0,
+        height: 115,
+      ),
+    );
+  }
+
+  ///////////////////////////////
+/////////////helper function/////
+////////////////////////////////
+
+  String removeDecimalZeroFormat(double n) {
+    return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }
 }
