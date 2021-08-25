@@ -49,16 +49,78 @@ class SliderImagesWidget extends StatelessWidget {
                 right: 0.0,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12)),
-                    color: Colors.black45,
-                  ),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12)),
+                      gradient: LinearGradient(
+                          colors: [Colors.white, Colors.transparent])),
                   height: 60.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 5.0, left: 10.0, right: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                sliderModel.category.toUpperCase(),
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                            Text(
+                              sliderModel.price + " AED",
+                              style: TextStyle(fontSize: 13.0),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          sliderModel.address,
+                          style: TextStyle(fontSize: 13),
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: Icon(Icons.king_bed_outlined),
+                            ),
+                            Text(
+                              "${removeDecimalZeroFormat(sliderModel.bedRooms)}",
+                              style: TextStyle(fontSize: 11.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6.0),
+                              child: Icon(Icons.bathtub_outlined),
+                            ),
+                            Text(
+                              "${removeDecimalZeroFormat(sliderModel.bathRooms)}",
+                              style: TextStyle(fontSize: 11.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6.0),
+                              child: Icon(Icons.apartment),
+                            ),
+                            Text(
+                              "${sliderModel.areaSpace}" + "sqft",
+                              style: TextStyle(fontSize: 11.0),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 )),
           ],
         ),
       ),
     );
+  }
+
+  /////////////////////////////////
+////////////helper function//////////
+/////////////////////////////////////
+  String removeDecimalZeroFormat(double n) {
+    return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }
 }
