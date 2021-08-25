@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:real_estate_app/bloc/home_bloc/home_bloc.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_event.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is ReceivedHomeDataState) {
             propertyList = state.propertyListModel;
             sliderList = state.sliderListModel;
-            return buildBodyWidget(
+            return buildHomeBodyWidget(
                 propertyListModel: state.propertyListModel,
                 sliderListModel: state.sliderListModel);
           } else if (state is HomeLoadingState) {
@@ -64,12 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (propertyList.length == 0 || sliderList.length == 0) {
       return Container();
     } else {
-      return buildBodyWidget(
+      return buildHomeBodyWidget(
           propertyListModel: propertyList, sliderListModel: sliderList);
     }
   }
 
-  Widget buildBodyWidget(
+  Widget buildHomeBodyWidget(
       {List<PropertyListModel> propertyListModel,
       List<SliderModel> sliderListModel}) {
     return Stack(
@@ -105,10 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget sortButtonWidget() {
     return Positioned(
       top: 2.0,
-      right: 5.0,
+      right: 12.0,
       child: Container(
-        width: 83,
-        height: 40,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               side: BorderSide(width: 1.5, color: Color(0xff026A83)),
@@ -119,11 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 "Sort",
-                style: TextStyle(color: Color(0xff026A83)),
+                style: TextStyle(color: Color(0xff026A83), fontSize: 12),
               ),
               Icon(
                 Icons.sort,
                 color: Color(0xff026A83),
+                size: 20,
               ),
             ],
           ),
@@ -135,8 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget floatingActionButtonWidget() {
     return SizedBox(
-      height: 40,
-      width: 80,
+      height: 35,
+      width: 75,
       child: FloatingActionButton.extended(
         backgroundColor: Color(0xff026A83),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -175,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget appBarWidget() {
     return AppBar(
-      toolbarHeight: 80, // Set this height
+      toolbarHeight: 65, // Set this height
       flexibleSpace: Container(
         color: Color(0xffF9F9F9),
         child: Column(
@@ -193,18 +194,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget searchWidget() {
     return Container(
-      height: 40,
+      height: 35,
       width: 335,
       child: TextField(
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: "e.g. Abu Dhabi",
           labelStyle: TextStyle(
-            color: Colors.grey,
-            fontWeight: FontWeight.bold,
-          ),
+              color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 15),
           prefixIcon: const Icon(
             Icons.search,
+            size: 22,
             color: Color(0xff026A83),
           ),
           suffixIcon: filterWidget(),
@@ -228,11 +228,12 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 "Filter",
-                style: TextStyle(color: Color(0xff026A83)),
+                style: TextStyle(color: Color(0xff026A83), fontSize: 13),
               ),
               Icon(
                 Icons.filter_list_outlined,
                 color: Color(0xff026A83),
+                size: 22,
               ),
             ],
           ),
@@ -252,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(color: Color(0xff026A83)),
           ),
           Icon(
-            Icons.arrow_drop_down_sharp,
+            Icons.arrow_drop_down_outlined,
             color: Color(0xff026A83),
           ),
         ],
