@@ -14,11 +14,11 @@ class SliderImagesWidget extends StatelessWidget {
       child: CarouselSlider(
         items: sliderList.map((item) => imageWidget(context, item)).toList(),
         options: CarouselOptions(
-          initialPage: 0,
-          height: 180,
-          viewportFraction: 0.90,
-          reverse: true,
-        ),
+            initialPage: 0,
+            height: 180,
+            viewportFraction: 0.90,
+            enableInfiniteScroll: false,
+            reverse: true),
       ),
     );
   }
@@ -37,7 +37,7 @@ class SliderImagesWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         elevation: 20.0,
-        margin: EdgeInsets.symmetric(horizontal: 8.0),
+        margin: EdgeInsets.symmetric(horizontal: 3.0),
         child: Stack(
           children: [
             Container(
