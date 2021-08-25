@@ -57,12 +57,11 @@ class PropertyApi {
         extractedData.forEach((element) {
           propertyListModel.add(PropertyModel.formJson(element));
         });
-
-        return propertyListModel;
       }
     } catch (error) {
       throw (error);
     }
+    return propertyListModel;
   }
 
   Future<List<SliderModel>> sliderDataApi() async {
