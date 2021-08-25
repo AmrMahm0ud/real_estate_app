@@ -4,7 +4,7 @@ import 'package:real_estate_app/model/slider_model.dart';
 import 'package:real_estate_app/network/remote/end_pionts.dart';
 import 'package:real_estate_app/network/remote/home_api.dart';
 
-class PropertyApi {
+class HomeApiManager {
   Future<List<PropertyModel>> getPropertyListApi() async {
     List<PropertyModel> propertyListModel = [];
     try {

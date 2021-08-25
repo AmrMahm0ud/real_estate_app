@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:real_estate_app/api_manager/property_api.dart';
+import 'package:real_estate_app/api_manager/home_api_manager.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/slider_model.dart';
@@ -35,7 +35,7 @@ class HomeRepository extends BaseHomeRepository {
   Future<List<SliderModel>> getSliderData() async {
     List<SliderModel> sliderList = [];
     try {
-      sliderList = await PropertyApi().sliderDataApi();
+      sliderList = await HomeApiManager().sliderDataApi();
     } catch (error) {
       throw (error);
     }
@@ -46,7 +46,7 @@ class HomeRepository extends BaseHomeRepository {
   Future<List<PropertyModel>> getPropertyData() async {
     List<PropertyModel> propertyList = [];
     try {
-      propertyList = await PropertyApi().getPropertyListApi();
+      propertyList = await HomeApiManager().getPropertyListApi();
     } catch (error) {
       throw (error);
     }
