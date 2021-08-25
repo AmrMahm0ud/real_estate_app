@@ -98,7 +98,10 @@ class ItemCardWidget extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 4.0),
-                            child: Icon(Icons.king_bed_outlined),
+                            child: Icon(
+                              Icons.king_bed_outlined,
+                              size: 22,
+                            ),
                           ),
                           Text(
                             "${removeDecimalZeroFormat(bedRooms)}",
@@ -106,7 +109,10 @@ class ItemCardWidget extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 6.0),
-                            child: Icon(Icons.bathtub_outlined),
+                            child: Icon(
+                              Icons.bathtub_outlined,
+                              size: 22,
+                            ),
                           ),
                           Text(
                             "${removeDecimalZeroFormat(bathRooms)}",
@@ -114,7 +120,10 @@ class ItemCardWidget extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 6.0),
-                            child: Icon(Icons.apartment),
+                            child: Icon(
+                              Icons.apartment,
+                              size: 22,
+                            ),
                           ),
                           Text(
                             "$areaSpace" + " sqft",
