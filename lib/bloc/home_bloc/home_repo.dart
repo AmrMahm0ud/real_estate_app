@@ -22,12 +22,12 @@ class HomeRepository extends BaseHomeRepository {
         homeState = ReceivedHomeDataState(
             propertyListModel: propertyList, sliderListModel: sliderList);
       } else {
-        homeState = ErrorHomeState();
+        homeState = ErrorHomeState("Some thing want wrong!");
       }
     } on SocketException {
-      homeState = NetworkErrorHomeState();
+      homeState = NetworkErrorHomeState("No internet");
     } catch (error) {
-      homeState = ErrorHomeState();
+      homeState = ErrorHomeState("Some thing want wrong!");
     }
     return homeState;
   }

@@ -16,6 +16,14 @@ class ReceivedHomeDataState extends HomeState {
 
 class HomeLoadingState extends HomeState {}
 
-class NetworkErrorHomeState extends HomeState {}
+class NetworkErrorHomeState extends HomeState {
+  final String message;
 
-class ErrorHomeState extends HomeState {}
+  NetworkErrorHomeState(this.message);
+}
+
+class ErrorHomeState extends HomeState {
+  final String message;
+
+  ErrorHomeState(this.message);
+}

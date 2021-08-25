@@ -20,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
     getHomeData();
   }
 
+  List<PropertyListModel> propertyList = [];
+  List<SliderModel> sliderList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ReceivedHomeDataState) {
+            propertyList = state.propertyListModel;
+            sliderList = state.sliderListModel;
             return buildBodyWidget(
-                state.propertyListModel, state.sliderListModel);
+                propertyListModel: state.propertyListModel,
+                sliderListModel: state.sliderListModel);
+          } else if (state is HomeLoadingState) {
+            return loadingWidget();
           } else {
-            return Text("Falied");
+            return defaultWidget();
           }
         },
       ),
@@ -45,8 +53,18 @@ class _HomeScreenState extends State<HomeScreen> {
   ////////////// Helper Widgets//////////
   ///////////////////////////////////////
 
-  Widget buildBodyWidget(List<PropertyListModel> propertyListModel,
-      List<SliderModel> sliderListModel) {
+  Widget defaultWidget() {
+    if (propertyList.length == 0 || sliderList.length == 0) {
+      return Container();
+    } else {
+      return buildBodyWidget(
+          propertyListModel: propertyList, sliderListModel: sliderList);
+    }
+  }
+
+  Widget buildBodyWidget(
+      {List<PropertyListModel> propertyListModel,
+      List<SliderModel> sliderListModel}) {
     return Stack(
       children: [
         ListView.builder(
@@ -68,6 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
         sortButtonWidget(),
       ],
+    );
+  }
+
+  Widget loadingWidget() {
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 
