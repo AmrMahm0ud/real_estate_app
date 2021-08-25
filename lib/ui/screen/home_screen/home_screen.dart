@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_bloc.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_event.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
@@ -29,7 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Color(0xffF9F9F9),
       appBar: appBarWidget(),
       body: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ErrorHomeState) {
+            buildToastMessage(state.message);
+          } else if (state is NetworkErrorHomeState) {
+            buildToastMessage(state.message);
+          }
+        },
         builder: (context, state) {
           if (state is ReceivedHomeDataState) {
             propertyList = state.propertyListModel;
@@ -258,5 +265,16 @@ class _HomeScreenState extends State<HomeScreen> {
 /////////////////////////////////////////
   void getHomeData() {
     BlocProvider.of<HomeBloc>(context).add(GetHomeDataEvent());
+  }
+
+  void buildToastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }
