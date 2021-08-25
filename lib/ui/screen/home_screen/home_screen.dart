@@ -80,10 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: propertyListModel.length,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: SliderImagesWidget(sliderListModel),
-                );
+                return SliderImagesWidget(sliderListModel);
               }
               index--;
               return ItemCardWidget(
@@ -117,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               side: BorderSide(width: 1.5, color: Color(0xff026A83)),
               primary: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0))),
+                  borderRadius: BorderRadius.circular(9))),
           child: Row(
             children: [
               Text(
@@ -140,10 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget floatingActionButtonWidget() {
     return SizedBox(
       height: 35,
-      width: 65,
+      width: 70,
       child: FloatingActionButton.extended(
         backgroundColor: Color(0xff026A83),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         icon: Icon(Icons.location_on),
         label: Text("Map"),
         onPressed: () {},
@@ -179,7 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget appBarWidget() {
     return AppBar(
-      toolbarHeight: 65, // Set this height
+      toolbarHeight: 65,
+      elevation: 0.0, // Set this height
       flexibleSpace: Container(
         color: Color(0xffF9F9F9),
         child: Column(

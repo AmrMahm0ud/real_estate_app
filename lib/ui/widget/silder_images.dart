@@ -9,17 +9,21 @@ class SliderImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: CarouselSlider(
-        items: sliderList.map((item) => imageWidget(context, item)).toList(),
-        options: CarouselOptions(
-            initialPage: 0,
-            height: 180,
-            viewportFraction: 0.90,
-            enableInfiniteScroll: false,
-            reverse: true),
-      ),
+    return Column(
+      children: [
+        CarouselSlider(
+          items: sliderList.map((item) => imageWidget(context, item)).toList(),
+          options: CarouselOptions(
+              initialPage: 0,
+              height: 180,
+              viewportFraction: 0.85,
+              enableInfiniteScroll: false,
+              reverse: false),
+        ),
+        SizedBox(
+          height: 5,
+        )
+      ],
     );
   }
 
@@ -30,13 +34,21 @@ class SliderImagesWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 4,
+            offset: Offset(0, 7), // changes position of shadow
+          ),
+        ],
       ),
       width: MediaQuery.of(context).size.width,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        elevation: 20.0,
+        elevation: 0.0,
         margin: EdgeInsets.symmetric(horizontal: 3.0),
         child: Stack(
           children: [
