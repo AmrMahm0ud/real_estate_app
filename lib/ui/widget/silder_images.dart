@@ -36,7 +36,7 @@ class SliderImagesWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        elevation: 10.0,
+        elevation: 20.0,
         margin: EdgeInsets.symmetric(horizontal: 8.0),
         child: Stack(
           children: [
