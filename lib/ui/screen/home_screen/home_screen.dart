@@ -4,6 +4,7 @@ import 'package:real_estate_app/bloc/home_bloc/home_bloc.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_event.dart';
 import 'package:real_estate_app/bloc/home_bloc/home_state.dart';
 import 'package:real_estate_app/model/property_model.dart';
+import 'package:real_estate_app/model/slider_model.dart';
 import 'package:real_estate_app/ui/widget/item_card_widget.dart';
 import 'package:real_estate_app/ui/widget/silder_images.dart';
 
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ReceivedHomeDataState) {
-            return buildBodyWidget(state.propertyListModel);
+            return buildBodyWidget(
+                state.propertyListModel, state.sliderListModel);
           } else {
             return Text("Falied");
           }
@@ -43,19 +45,17 @@ class _HomeScreenState extends State<HomeScreen> {
   ////////////// Helper Widgets//////////
   ///////////////////////////////////////
 
-  // Stack(
-  // children: [
-  // homeWidget(),
-  // sortButtonWidget(),
-  // ],
-  // ),
-
-  Widget buildBodyWidget(List<PropertyListModel> propertyListModel) {
+  Widget buildBodyWidget(List<PropertyListModel> propertyListModel,
+      List<SliderModel> sliderListModel) {
     return Stack(
       children: [
         ListView.builder(
             itemCount: propertyListModel.length,
             itemBuilder: (context, index) {
+              if (index == 0) {
+                return SliderImagesWidget(sliderListModel);
+              }
+              index--;
               return ItemCardWidget(
                 price: propertyListModel[index].price,
                 address: propertyListModel[index].address,
@@ -67,15 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }),
         sortButtonWidget(),
-      ],
-    );
-  }
-
-  Widget homeWidget() {
-    return ListView(
-      children: [
-        SliderImagesWidget(),
-        ItemCardWidget(),
       ],
     );
   }
