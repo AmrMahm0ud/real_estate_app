@@ -80,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: propertyListModel.length,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return SliderImagesWidget(sliderListModel);
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: SliderImagesWidget(sliderListModel),
+                );
               }
               index--;
               return ItemCardWidget(
@@ -137,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget floatingActionButtonWidget() {
     return SizedBox(
       height: 35,
-      width: 75,
+      width: 65,
       child: FloatingActionButton.extended(
         backgroundColor: Color(0xff026A83),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

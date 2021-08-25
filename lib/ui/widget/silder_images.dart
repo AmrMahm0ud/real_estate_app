@@ -14,7 +14,11 @@ class SliderImagesWidget extends StatelessWidget {
       child: CarouselSlider(
         items: sliderList.map((item) => imageWidget(context, item)).toList(),
         options: CarouselOptions(
-            initialPage: 0, height: 180, viewportFraction: 0.90),
+          initialPage: 0,
+          height: 180,
+          viewportFraction: 0.90,
+          reverse: true,
+        ),
       ),
     );
   }
@@ -32,7 +36,7 @@ class SliderImagesWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        elevation: 20.0,
+        elevation: 10.0,
         margin: EdgeInsets.symmetric(horizontal: 8.0),
         child: Stack(
           children: [
@@ -101,9 +105,12 @@ class SliderImagesWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 6.0),
                               child: Icon(Icons.apartment),
                             ),
-                            Text(
-                              "${sliderModel.areaSpace}" + "sqft",
-                              style: TextStyle(fontSize: 11.0),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                "${sliderModel.areaSpace}" + " sqft",
+                                style: TextStyle(fontSize: 11.0),
+                              ),
                             )
                           ],
                         )

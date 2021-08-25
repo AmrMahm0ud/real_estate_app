@@ -36,7 +36,7 @@ class ItemCardWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          elevation: 20.0,
+          elevation: 10.0,
           child: Row(
             children: [
               Container(
@@ -117,7 +117,7 @@ class ItemCardWidget extends StatelessWidget {
                             child: Icon(Icons.apartment),
                           ),
                           Text(
-                            "$areaSpace" + "sqft",
+                            "$areaSpace" + " sqft",
                             style: TextStyle(fontSize: 11.0),
                           )
                         ],
