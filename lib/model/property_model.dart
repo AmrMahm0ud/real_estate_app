@@ -1,4 +1,4 @@
-class PropertyListModel {
+class PropertyModel {
   String price;
   String address;
   String category;
@@ -7,7 +7,7 @@ class PropertyListModel {
   double areaSpace;
   List<String> propertyImages = [];
 
-  PropertyListModel(
+  PropertyModel(
       {this.price,
       this.address,
       this.category,
@@ -16,14 +16,14 @@ class PropertyListModel {
       this.areaSpace,
       this.propertyImages});
 
-  PropertyListModel.formJson(Map<String, dynamic> propertyFromMap) {
-    price = propertyFromMap['price'] as String;
-    address = propertyFromMap['address'] as String;
-    category = propertyFromMap['category'] as String;
-    bedRooms = propertyFromMap['bedRoom'] as double;
-    bathRooms = propertyFromMap['bathRoom'] as double;
-    areaSpace = propertyFromMap['areaSpace'] as double;
-    List<dynamic> images = propertyFromMap['propertyImages'].toList();
+  PropertyModel.formJson(Map<String, dynamic> propertyFromJson) {
+    price = propertyFromJson['price'] as String;
+    address = propertyFromJson['address'] as String;
+    category = propertyFromJson['category'] as String;
+    bedRooms = propertyFromJson['bedRoom'] as double;
+    bathRooms = propertyFromJson['bathRoom'] as double;
+    areaSpace = propertyFromJson['areaSpace'] as double;
+    List<dynamic> images = propertyFromJson['propertyImages'].toList();
     images.forEach((element) {
       propertyImages.add((element['url']) as String);
     });

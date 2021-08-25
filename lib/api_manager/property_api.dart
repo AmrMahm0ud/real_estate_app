@@ -5,8 +5,8 @@ import 'package:real_estate_app/network/remote/end_pionts.dart';
 import 'package:real_estate_app/network/remote/home_api.dart';
 
 class PropertyApi {
-  Future<List<PropertyListModel>> getPropertyListApi() async {
-    List<PropertyListModel> propertyListModel = [];
+  Future<List<PropertyModel>> getPropertyListApi() async {
+    List<PropertyModel> propertyListModel = [];
     try {
       Response response = await HomeApi.getHomeData(path: PROPERTY, data: {
         "appLanguage": "en",
@@ -55,7 +55,7 @@ class PropertyApi {
       if (response.statusCode == 200) {
         final extractedData = response.data['data'] as List<dynamic>;
         extractedData.forEach((element) {
-          propertyListModel.add(PropertyListModel.formJson(element));
+          propertyListModel.add(PropertyModel.formJson(element));
         });
 
         return propertyListModel;

@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getHomeData();
   }
 
-  List<PropertyListModel> propertyList = [];
+  List<PropertyModel> propertyList = [];
   List<SliderModel> sliderList = [];
 
   @override
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildHomeBodyWidget(
-      {List<PropertyListModel> propertyListModel,
+      {List<PropertyModel> propertyListModel,
       List<SliderModel> sliderListModel}) {
     return Stack(
       children: [

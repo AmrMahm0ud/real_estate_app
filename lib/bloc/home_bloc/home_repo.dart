@@ -13,7 +13,7 @@ class HomeRepository extends BaseHomeRepository {
   @override
   Future<HomeState> getHomeData() async {
     HomeState homeState;
-    List<PropertyListModel> propertyList = [];
+    List<PropertyModel> propertyList = [];
     List<SliderModel> sliderList = [];
     try {
       propertyList = await getPropertyData();
@@ -43,8 +43,8 @@ class HomeRepository extends BaseHomeRepository {
     return sliderList;
   }
 
-  Future<List<PropertyListModel>> getPropertyData() async {
-    List<PropertyListModel> propertyList = [];
+  Future<List<PropertyModel>> getPropertyData() async {
+    List<PropertyModel> propertyList = [];
     try {
       propertyList = await PropertyApi().getPropertyListApi();
     } catch (error) {

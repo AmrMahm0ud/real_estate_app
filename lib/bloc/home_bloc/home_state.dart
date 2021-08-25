@@ -7,7 +7,7 @@ abstract class HomeState {}
 class InitialHomeState extends HomeState {}
 
 class ReceivedHomeDataState extends HomeState {
-  final List<PropertyListModel> propertyListModel;
+  final List<PropertyModel> propertyListModel;
   final List<SliderModel> sliderListModel;
 
   ReceivedHomeDataState(
