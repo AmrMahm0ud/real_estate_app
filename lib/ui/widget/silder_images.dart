@@ -9,21 +9,17 @@ class SliderImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CarouselSlider(
-          items: sliderList.map((item) => imageWidget(context, item)).toList(),
-          options: CarouselOptions(
-              initialPage: 0,
-              height: 180,
-              viewportFraction: 0.85,
-              enableInfiniteScroll: false,
-              reverse: false),
-        ),
-        SizedBox(
-          height: 5,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: CarouselSlider(
+        items: sliderList.map((item) => imageWidget(context, item)).toList(),
+        options: CarouselOptions(
+            initialPage: 0,
+            height: 180,
+            viewportFraction: 0.95,
+            enableInfiniteScroll: false,
+            reverse: false),
+      ),
     );
   }
 
@@ -87,50 +83,48 @@ class SliderImagesWidget extends StatelessWidget {
                             ),
                             Text(
                               sliderModel.price + " AED",
-                              style: TextStyle(fontSize: 13.0),
+                              style: TextStyle(
+                                  fontSize: 13.0, color: Colors.black),
                             ),
                           ],
                         ),
                         Text(
                           sliderModel.address,
-                          style: TextStyle(fontSize: 13),
+                          style: TextStyle(fontSize: 13, color: Colors.black45),
                         ),
                         Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 4.0),
-                              child: Icon(
-                                Icons.king_bed_outlined,
-                                size: 22,
-                              ),
+                              child: Icon(Icons.king_bed_outlined,
+                                  size: 22, color: Colors.black45),
                             ),
                             Text(
                               "${removeDecimalZeroFormat(sliderModel.bedRooms)}",
-                              style: TextStyle(fontSize: 11.0),
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Colors.black45),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 6.0),
-                              child: Icon(
-                                Icons.bathtub_outlined,
-                                size: 22,
-                              ),
+                              child: Icon(Icons.bathtub_outlined,
+                                  size: 22, color: Colors.black45),
                             ),
                             Text(
                               "${removeDecimalZeroFormat(sliderModel.bathRooms)}",
-                              style: TextStyle(fontSize: 11.0),
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Colors.black45),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 6.0),
-                              child: Icon(
-                                Icons.apartment,
-                                size: 22,
-                              ),
+                              child: Icon(Icons.apartment,
+                                  size: 22, color: Colors.black45),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 6.0),
                               child: Text(
                                 "${sliderModel.areaSpace}" + " sqft",
-                                style: TextStyle(fontSize: 11.0),
+                                style: TextStyle(
+                                    fontSize: 11.0, color: Colors.black45),
                               ),
                             )
                           ],
