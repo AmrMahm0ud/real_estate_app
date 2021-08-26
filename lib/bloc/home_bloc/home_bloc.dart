@@ -11,8 +11,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is GetHomeDataEvent) {
-      yield HomeLoadingState();
-      yield await baseHomeRepository.getHomeData();
+      if (event.lastRowItem == 1) {
+        yield HomeLoadingState();
+        yield await baseHomeRepository.getHomeData(event.lastRowItem);
+      } else
+        yield await baseHomeRepository.getHomeData(event.lastRowItem);
     }
   }
 }

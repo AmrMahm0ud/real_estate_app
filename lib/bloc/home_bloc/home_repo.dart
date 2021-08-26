@@ -6,28 +6,28 @@ import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/slider_model.dart';
 
 abstract class BaseHomeRepository {
-  Future<HomeState> getHomeData();
+  Future<HomeState> getHomeData(int lastRowItem);
 }
 
 class HomeRepository extends BaseHomeRepository {
   @override
-  Future<HomeState> getHomeData() async {
+  Future<HomeState> getHomeData(int lastRowItem) async {
     HomeState homeState;
     List<PropertyModel> propertyList = [];
     List<SliderModel> sliderList = [];
     try {
-      propertyList = await getPropertyData();
+      propertyList = await getPropertyData(lastRowItem);
       sliderList = await getSliderData();
       if (propertyList.length != 0 && sliderList.length != 0) {
         homeState = ReceivedHomeDataState(
             propertyListModel: propertyList, sliderListModel: sliderList);
       } else {
-        homeState = ErrorHomeState("Some thing want wrong!");
+        homeState = ErrorHomeState("Something want wrong!");
       }
     } on SocketException {
       homeState = NetworkErrorHomeState("No internet");
     } catch (error) {
-      homeState = ErrorHomeState("Some thing want wrong!");
+      homeState = ErrorHomeState("Something want wrong!");
     }
     return homeState;
   }
@@ -43,10 +43,10 @@ class HomeRepository extends BaseHomeRepository {
     return sliderList;
   }
 
-  Future<List<PropertyModel>> getPropertyData() async {
+  Future<List<PropertyModel>> getPropertyData(int lastRowItem) async {
     List<PropertyModel> propertyList = [];
     try {
-      propertyList = await HomeApiManager().getPropertyListApi();
+      propertyList = await HomeApiManager().getPropertyListApi(lastRowItem);
     } catch (error) {
       throw (error);
     }

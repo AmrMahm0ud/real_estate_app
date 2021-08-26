@@ -17,10 +17,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _controller = ScrollController();
+  int lastRowItem = 0;
+
   @override
   void initState() {
     super.initState();
     getHomeData();
+    _controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+      getHomeData();
+    }
   }
 
   List<PropertyModel> propertyList = [];
@@ -41,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           if (state is ReceivedHomeDataState) {
-            propertyList = state.propertyListModel;
+            propertyList += state.propertyListModel;
             sliderList = state.sliderListModel;
             return buildHomeBodyWidget(
-                propertyListModel: state.propertyListModel,
+                propertyListModel: propertyList,
                 sliderListModel: state.sliderListModel);
           } else if (state is HomeLoadingState) {
             return loadingWidget();
@@ -77,10 +87,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return Stack(
       children: [
         ListView.builder(
+            controller: _controller,
             itemCount: propertyListModel.length,
             itemBuilder: (context, index) {
               if (index == 0) {
                 return SliderImagesWidget(sliderListModel);
+              } else if (index == propertyList.length - 1) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 4.0, left: 4.0),
+                  child: Container(
+                      height: 80.0,
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xff026A83)),
+                      ))),
+                );
               }
               index--;
               return ItemCardWidget(
@@ -266,7 +288,8 @@ class _HomeScreenState extends State<HomeScreen> {
 ////////////helper function///////////////
 /////////////////////////////////////////
   void getHomeData() {
-    BlocProvider.of<HomeBloc>(context).add(GetHomeDataEvent());
+    lastRowItem++;
+    BlocProvider.of<HomeBloc>(context).add(GetHomeDataEvent(lastRowItem));
   }
 
   void buildToastMessage(String message) {

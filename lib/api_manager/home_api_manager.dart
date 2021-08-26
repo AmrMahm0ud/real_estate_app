@@ -5,7 +5,7 @@ import 'package:real_estate_app/network/remote/end_pionts.dart';
 import 'package:real_estate_app/network/remote/home_api.dart';
 
 class HomeApiManager {
-  Future<List<PropertyModel>> getPropertyListApi() async {
+  Future<List<PropertyModel>> getPropertyListApi(int lastRowItem) async {
     List<PropertyModel> propertyListModel = [];
     try {
       Response response = await HomeApi.getHomeData(path: PROPERTY, data: {
@@ -30,7 +30,7 @@ class HomeApiManager {
           "CategoryName": "",
           "CityName": "",
           "PropertyAmenities": [],
-          "LastRowId": 19,
+          "LastRowId": lastRowItem,
           "CityId": -1,
           "propertyAdOnsDtos": [],
           "IsRentedName": "",
