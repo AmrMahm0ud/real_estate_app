@@ -9,17 +9,14 @@ class SliderImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 4),
-      child: CarouselSlider(
-        items: sliderList.map((item) => imageWidget(context, item)).toList(),
-        options: CarouselOptions(
-            initialPage: 0,
-            height: 180,
-            viewportFraction: 0.95,
-            enableInfiniteScroll: false,
-            reverse: false),
-      ),
+    return CarouselSlider(
+      items: sliderList.map((item) => imageWidget(context, item)).toList(),
+      options: CarouselOptions(
+          initialPage: 0,
+          height: 180,
+          viewportFraction: 0.90,
+          enableInfiniteScroll: false,
+          reverse: false),
     );
   }
 
@@ -32,7 +29,7 @@ class SliderImagesWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       elevation: 10.0,
-      margin: EdgeInsets.symmetric(horizontal: 2.0, vertical: 4.0),
+      margin: EdgeInsets.symmetric(horizontal: 1.0, vertical: 12.0),
       child: Stack(
         children: [
           Container(

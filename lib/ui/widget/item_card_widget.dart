@@ -30,111 +30,116 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-      ),
-      elevation: 10.0,
-      child: Row(
-        children: [
-          Container(
-            width: 140,
-            child: sliderImageCardWidget(widget.sliderCardImages),
-          ),
-          Expanded(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6.0, left: 5.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        ),
+        elevation: 10.0,
+        margin: EdgeInsets.symmetric(horizontal: 4.0),
+        child: Row(
+          children: [
+            Container(
+              width: 140,
+              child: sliderImageCardWidget(widget.sliderCardImages),
+            ),
+            Expanded(
+              child: Container(
+                height: 115,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.category.toUpperCase(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          Icon(
+                            Icons.favorite_border,
+                            color: Colors.grey,
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: Text(
+                        widget.price + " AED",
+                        style: TextStyle(fontSize: 13.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        width: 100,
+                        child: Text(
+                          widget.address,
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 13.0, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    Row(
                       children: [
-                        Expanded(
-                          child: Text(
-                            widget.category.toUpperCase(),
-                            style: TextStyle(color: Colors.grey),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
+                          child: Icon(
+                            Icons.king_bed_outlined,
+                            size: 22,
+                            color: Colors.black54,
                           ),
                         ),
-                        Icon(
-                          Icons.favorite_border,
-                          color: Colors.grey,
+                        Text(
+                          "${removeDecimalZeroFormat(widget.bedRooms)}",
+                          style: TextStyle(
+                            fontSize: 11.0,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 6.0),
+                          child: Icon(
+                            Icons.bathtub_outlined,
+                            size: 22,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        Text(
+                          "${removeDecimalZeroFormat(widget.bathRooms)}",
+                          style: TextStyle(
+                            fontSize: 11.0,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 6.0),
+                          child: Icon(
+                            Icons.apartment,
+                            size: 22,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        Text(
+                          "${widget.areaSpace}" + " sqft",
+                          style: TextStyle(
+                            fontSize: 11.0,
+                            color: Colors.black54,
+                          ),
                         )
                       ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      widget.price + " AED",
-                      style: TextStyle(fontSize: 13.0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      width: 100,
-                      child: Text(
-                        widget.address,
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 13.0, color: Colors.black),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Icon(
-                          Icons.king_bed_outlined,
-                          size: 22,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Text(
-                        "${removeDecimalZeroFormat(widget.bedRooms)}",
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6.0),
-                        child: Icon(
-                          Icons.bathtub_outlined,
-                          size: 22,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Text(
-                        "${removeDecimalZeroFormat(widget.bathRooms)}",
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6.0),
-                        child: Icon(
-                          Icons.apartment,
-                          size: 22,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Text(
-                        "${widget.areaSpace}" + " sqft",
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          color: Colors.black54,
-                        ),
-                      )
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
