@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ItemCardWidget extends StatelessWidget {
+class ItemCardWidget extends StatefulWidget {
   final String price, address, category;
 
   final double bedRooms, bathRooms, areaSpace;
@@ -19,6 +20,13 @@ class ItemCardWidget extends StatelessWidget {
       this.areaSpace,
       this.sliderCardImages})
       : super(key: key);
+
+  @override
+  _ItemCardWidgetState createState() => _ItemCardWidgetState();
+}
+
+class _ItemCardWidgetState extends State<ItemCardWidget> {
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +59,7 @@ class ItemCardWidget extends StatelessWidget {
                       bottomLeft: Radius.circular(12)),
                 ),
                 width: 140,
-                child: sliderImageCardWidget(sliderCardImages),
+                child: sliderImageCardWidget(widget.sliderCardImages),
               ),
               Expanded(
                 child: Container(
@@ -68,7 +76,7 @@ class ItemCardWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  category.toUpperCase(),
+                                  widget.category.toUpperCase(),
                                   style: TextStyle(color: Colors.grey),
                                 ),
                               ),
@@ -82,7 +90,7 @@ class ItemCardWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 4.0),
                           child: Text(
-                            price + " AED",
+                            widget.price + " AED",
                             style: TextStyle(fontSize: 13.0),
                           ),
                         ),
@@ -94,7 +102,7 @@ class ItemCardWidget extends StatelessWidget {
                             ),
                             width: 100,
                             child: Text(
-                              address,
+                              widget.address,
                               maxLines: 2,
                               style: TextStyle(
                                   fontSize: 13.0, color: Colors.black),
@@ -112,7 +120,7 @@ class ItemCardWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${removeDecimalZeroFormat(bedRooms)}",
+                              "${removeDecimalZeroFormat(widget.bedRooms)}",
                               style: TextStyle(
                                 fontSize: 11.0,
                                 color: Colors.black54,
@@ -127,7 +135,7 @@ class ItemCardWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${removeDecimalZeroFormat(bathRooms)}",
+                              "${removeDecimalZeroFormat(widget.bathRooms)}",
                               style: TextStyle(
                                 fontSize: 11.0,
                                 color: Colors.black54,
@@ -142,7 +150,7 @@ class ItemCardWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "$areaSpace" + " sqft",
+                              "${widget.areaSpace}" + " sqft",
                               style: TextStyle(
                                 fontSize: 11.0,
                                 color: Colors.black54,
@@ -167,26 +175,56 @@ class ItemCardWidget extends StatelessWidget {
 /////////////////////////////////
 
   Widget sliderImageCardWidget(List<String> imagesUrl) {
-    return CarouselSlider(
-      items: imagesUrl
-          .map((image) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12.0),
-                    topLeft: Radius.circular(12.0),
-                  ),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                      image,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        CarouselSlider(
+          items: imagesUrl
+              .map((image) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(12.0),
+                        topLeft: Radius.circular(12.0),
+                      ),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(
+                          image,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ))
-          .toList(),
-      options: CarouselOptions(
-        viewportFraction: 1.0,
-        height: 115,
+                  ))
+              .toList(),
+          options: CarouselOptions(
+            onPageChanged: (index, reason) {
+              setState(() {
+                activeIndex = index;
+              });
+            },
+            viewportFraction: 1.0,
+            height: 115,
+          ),
+        ),
+        buildIndicator(),
+      ],
+    );
+  }
+
+  Widget buildIndicator() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      child: AnimatedSmoothIndicator(
+        activeIndex: activeIndex,
+        count: widget.sliderCardImages.length,
+        effect: SlideEffect(
+          dotColor: Colors.grey,
+          dotHeight: 6,
+          dotWidth: 6,
+          spacing: 1.5,
+          paintStyle: PaintingStyle.fill,
+          strokeWidth: 1,
+          activeDotColor: Colors.white,
+        ),
       ),
     );
   }
