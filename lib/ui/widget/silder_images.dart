@@ -14,7 +14,7 @@ class SliderImagesWidget extends StatelessWidget {
       options: CarouselOptions(
           initialPage: 0,
           height: 180,
-          viewportFraction: 0.90,
+          viewportFraction: 0.93,
           enableInfiniteScroll: false,
           reverse: false),
     );
@@ -29,7 +29,7 @@ class SliderImagesWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       elevation: 10.0,
-      margin: EdgeInsets.symmetric(horizontal: 1.0, vertical: 12.0),
+      margin: EdgeInsets.only(bottom: 9.0, left: 5.0),
       child: Stack(
         children: [
           Container(
@@ -78,33 +78,36 @@ class SliderImagesWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          Icon(Icons.king_bed_outlined,
+                              size: 22, color: Colors.black45),
                           Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: Icon(Icons.king_bed_outlined,
-                                size: 22, color: Colors.black45),
-                          ),
-                          Text(
-                            "${removeDecimalZeroFormat(sliderModel.bedRooms)}",
-                            style: TextStyle(
-                                fontSize: 11.0, color: Colors.black45),
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: Text(
+                              "${removeDecimalZeroFormat(sliderModel.bedRooms)}",
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Colors.black45),
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
+                            padding: const EdgeInsets.only(left: 12.0),
                             child: Icon(Icons.bathtub_outlined,
                                 size: 22, color: Colors.black45),
                           ),
-                          Text(
-                            "${removeDecimalZeroFormat(sliderModel.bathRooms)}",
-                            style: TextStyle(
-                                fontSize: 11.0, color: Colors.black45),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: Text(
+                              "${removeDecimalZeroFormat(sliderModel.bathRooms)}",
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Colors.black45),
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
+                            padding: const EdgeInsets.only(left: 12.0),
                             child: Icon(Icons.apartment,
                                 size: 22, color: Colors.black45),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
+                            padding: const EdgeInsets.only(left: 2.0),
                             child: Text(
                               "${sliderModel.areaSpace}" + " sqft",
                               style: TextStyle(
