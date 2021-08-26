@@ -46,12 +46,12 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
             ),
             Expanded(
               child: Container(
-                height: 115,
+                height: 105,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 4.0),
+                      padding: const EdgeInsets.only(left: 4.0, top: 1.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -60,18 +60,22 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
                               style: TextStyle(color: Colors.grey),
                             ),
                           ),
-                          Icon(
-                            Icons.favorite_border,
-                            color: Colors.grey,
+                          Container(
+                            margin: EdgeInsets.only(right: 8.0),
+                            child: Icon(
+                              Icons.favorite_border,
+                              color: Colors.grey,
+                            ),
                           )
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 4.0),
+                      padding: const EdgeInsets.only(
+                          left: 4.0, top: 2.0, bottom: 2.0),
                       child: Text(
                         widget.price + " AED",
-                        style: TextStyle(fontSize: 13.0),
+                        style: TextStyle(fontSize: 14.0),
                       ),
                     ),
                     Padding(
@@ -95,11 +99,14 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
                             color: Colors.black54,
                           ),
                         ),
-                        Text(
-                          "${removeDecimalZeroFormat(widget.bedRooms)}",
-                          style: TextStyle(
-                            fontSize: 11.0,
-                            color: Colors.black54,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0, right: 6.0),
+                          child: Text(
+                            "${removeDecimalZeroFormat(widget.bedRooms)}",
+                            style: TextStyle(
+                              fontSize: 11.0,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                         Padding(
@@ -110,11 +117,14 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
                             color: Colors.black54,
                           ),
                         ),
-                        Text(
-                          "${removeDecimalZeroFormat(widget.bathRooms)}",
-                          style: TextStyle(
-                            fontSize: 11.0,
-                            color: Colors.black54,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0, right: 6.0),
+                          child: Text(
+                            "${removeDecimalZeroFormat(widget.bathRooms)}",
+                            style: TextStyle(
+                              fontSize: 11.0,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                         Padding(
@@ -125,11 +135,14 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
                             color: Colors.black54,
                           ),
                         ),
-                        Text(
-                          "${widget.areaSpace}" + " sqft",
-                          style: TextStyle(
-                            fontSize: 11.0,
-                            color: Colors.black54,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2.0),
+                          child: Text(
+                            "${widget.areaSpace}" + " sqft",
+                            style: TextStyle(
+                              fontSize: 11.0,
+                              color: Colors.black54,
+                            ),
                           ),
                         )
                       ],
