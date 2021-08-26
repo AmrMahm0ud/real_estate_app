@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget floatingActionButtonWidget() {
-    return SizedBox(
+    return Container(
       height: 35,
       width: 70,
       child: FloatingActionButton.extended(
