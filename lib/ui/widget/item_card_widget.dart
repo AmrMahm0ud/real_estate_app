@@ -36,7 +36,7 @@ class _ItemCardWidgetState extends State<ItemCardWidget> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
         ),
-        elevation: 10.0,
+        elevation: 20.0,
         margin: EdgeInsets.symmetric(horizontal: 4.0),
         child: Row(
           children: [
